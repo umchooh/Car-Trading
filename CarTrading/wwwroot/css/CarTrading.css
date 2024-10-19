@@ -1,0 +1,18 @@
+﻿.product {
+    font-family: "Times New Roman";
+    text-align: left;
+    background-color: #FFF8DC;
+    border-style: solid;
+    border-color: black;
+    border-width: 3px;
+    margin: 10px;
+    padding: 5px;
+    border-radius: 10px;
+}
+#carPic {
+    max-width: 90px;
+    height: adjust;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 10px;
+}

@@ -1,0 +1,28 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div>
+    <h1>Welcome to the Product List</h1>
+    <div class="row">
+        <div class="col-md-3">
+            <div class="row product"><b>The zone where the filters will be</b></div>
+        </div>
+        <div class="col-md-9">
+            @foreach (var product in Model)
+            {
+                <div class="row product">
+                    <div class="row"><b>Product @product.Product_ID:</b></div>
+                <div class="row">
+                    <div class="col-md-2" id="carPic" style="background-image: url('CarPicture.jpg');"></div>
+                    <div class="col-md-10">
+                        <h3>@product.Product_title</h3>
+                        <p>@product.Product_desc</p>
+                    </div>
+                </div>
+            </div>
+            }
+        </div>
+    </div>
+    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
