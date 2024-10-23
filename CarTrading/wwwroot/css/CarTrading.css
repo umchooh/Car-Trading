@@ -1,4 +1,4 @@
-﻿.product {
+﻿.productList, .productDetails {
     font-family: "Times New Roman";
     text-align: left;
     background-color: #FFF8DC;
@@ -9,9 +9,24 @@
     padding: 5px;
     border-radius: 10px;
 }
-#carPic {
+.productList a {
+    text-decoration: none;
+    color: black;
+}
+.productDetails a {
+    text-decoration: none;
+    color: white;
+}
+#carPicList {
     max-width: 90px;
-    height: adjust;
+    aspect-ratio: 1 / 1;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 10px;
+}
+#carPicDetails {
+    max-width: 180px;
+    aspect-ratio: 1 / 1;
     background-repeat: no-repeat;
     background-size: cover;
     border-radius: 10px;

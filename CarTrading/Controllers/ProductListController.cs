@@ -23,7 +23,7 @@ namespace CarTrading.Controllers
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 connection.Open();
-                string sql = "select * from Product where postStatus = 'AVAILABLE';";
+                string sql = "select * from Product inner join PContent on Product.ID = PContent.productID where postStatus = 'AVAILABLE';";
                 using (SqlCommand command = new SqlCommand(sql, connection))
                 {
                     using (SqlDataReader reader = command.ExecuteReader())
@@ -36,6 +36,13 @@ namespace CarTrading.Controllers
                             string Product_desc = reader["pDesc"].ToString();
                             string Product_price = reader["pPrice"].ToString();
                             string Product_loc = reader["pLocation"].ToString();
+                            string Product_color = reader["pColour"].ToString();
+                            string Product_make = reader["pMake"].ToString();
+                            string Product_model = reader["pModel"].ToString();
+                            string Product_year = reader["pYear"].ToString();
+                            string Product_milage = reader["pMileage"].ToString();
+                            string Product_trans = reader["pTransmission"].ToString();
+                            string Product_fuel = reader["pFuelType"].ToString();
                             ProductList product = new ProductList();
                             product.Product_ID = Product_ID;
                             product.User_ID = User_ID;
@@ -43,6 +50,13 @@ namespace CarTrading.Controllers
                             product.Product_desc = Product_desc;
                             product.Product_price = Product_price;
                             product.Product_loc = Product_loc;
+                            product.Product_color = Product_color;
+                            product.Product_make = Product_make;
+                            product.Product_model = Product_model;
+                            product.Product_year = Product_year;
+                            product.Product_milage = Product_milage;
+                            product.Product_trans = Product_trans;
+                            product.Product_fuel = Product_fuel;
                             model.Add(product);
                         }
                     }

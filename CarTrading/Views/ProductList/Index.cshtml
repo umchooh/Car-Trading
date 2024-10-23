@@ -6,21 +6,29 @@
     <h1>Welcome to the Product List</h1>
     <div class="row">
         <div class="col-md-3">
-            <div class="row product"><b>The zone where the filters will be</b></div>
+            <div class="row productList">
+                <div>
+                    <button class="btn btn-primary">Update</button>
+                    <button class="btn btn-primary">Refresh</button>
+                </div>
+                <b>Search by:</b>
+            </div>
         </div>
         <div class="col-md-9">
             @foreach (var product in Model)
             {
-                <div class="row product">
+                <div class="row productList">
+                    <a href="@Url.Action("Index", "ProductDetails", new { Product_ID = product.Product_ID })">
                     <div class="row"><b>Product @product.Product_ID:</b></div>
-                <div class="row">
-                    <div class="col-md-2" id="carPic" style="background-image: url('CarPicture.jpg');"></div>
-                    <div class="col-md-10">
-                        <h3>@product.Product_title</h3>
-                        <p>@product.Product_desc</p>
+                    <div class="row">
+                        <div class="col-md-2" id="carPicList" style="background-image: url('CarPicture.jpg');"></div>
+                        <div class="col-md-10">
+                            <h3>@product.Product_title</h3>
+                            <p>@product.Product_desc</p>
+                        </div>
                     </div>
+                    </a>
                 </div>
-            </div>
             }
         </div>
     </div>

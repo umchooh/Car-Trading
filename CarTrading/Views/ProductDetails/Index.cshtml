@@ -1,0 +1,36 @@
+﻿@model ProductList
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div>
+    <h1>Product details</h1>
+    <div class="row productDetails">
+        <div class="row">
+            <div class="col-md-3" id="carPicDetails" style="background-image: url('CarPicture.jpg');"></div>
+            <div class="col-md-9">
+                <h4><b>Product @Model.Product_ID</b></h4>
+                <h2><b>@Model.Product_title</b></h2>
+                <h3>@Model.Product_desc</h3>
+            </div>
+        </div>
+        <div class="row">
+            <h3><b>Price: </b>@Model.Product_price $</h3>
+            <h3><b>Location: </b>@Model.Product_loc</h3>
+            <h3><b>Color: </b>@Model.Product_color</h3>
+            <h3><b>Make: </b>@Model.Product_make</h3>
+            <h3><b>Model: </b>@Model.Product_model</h3>
+            <h3><b>Year: </b>@Model.Product_year</h3>
+            <h3><b>Mileage: </b>@Model.Product_milage</h3>
+            <h3><b>Transmission: </b>@Model.Product_trans</h3>
+            <h3><b>Fuel: </b>@Model.Product_fuel</h3>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+            <a class="btn btn-primary" href="@Url.Action("Index", "ProductList")">Back</a>
+            <button class="btn btn-primary">buy</button>
+            </div>
+        </div>
+    </div>
+    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
