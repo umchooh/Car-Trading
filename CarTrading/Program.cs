@@ -1,3 +1,4 @@
+using CarTrading;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -19,6 +20,10 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
+
+app.MapControllerRoute(
+    name: "signup",
+    pattern: "SignUp/{action=Index}/{id?}");
 
 app.MapControllerRoute(
     name: "default",
