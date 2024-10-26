@@ -18,6 +18,10 @@ namespace CarTrading.Controllers
 
         public IActionResult Index(string Product_ID)
         {
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString("Username")))
+            {
+                return RedirectToAction("Login", "Index");
+            }
             ProductList model = new ProductList();
             using (SqlConnection connection = new SqlConnection(connectionString))
             {

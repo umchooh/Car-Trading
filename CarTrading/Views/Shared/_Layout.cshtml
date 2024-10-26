@@ -19,12 +19,15 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
+                        @if (!string.IsNullOrEmpty(Context.Session.GetString("Username")))
+                        {
+                                <div class="username-padding"><h3>
+                                        Hi, @Context.Session.GetString("Username") (@Context.Session.GetString("roletype"))  
+                                </h3></div>
+                                <li class="nav-item" style="padding-left: 60px;">
+                                    <a class="btn btn-dark nav-link text-white" asp-area="" asp-controller="Login" asp-action="Logout">Logout</a>
+                                </li>
+                        }
                     </ul>
                 </div>
             </div>
@@ -38,7 +41,7 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2024 - CarTrading - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2024 - CarTrading
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
