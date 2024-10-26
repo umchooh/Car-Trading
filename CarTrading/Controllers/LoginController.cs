@@ -10,7 +10,7 @@ namespace CarTrading.Controllers
     public class LoginController : Controller
     {        
 
-        private readonly string connectionString = "Data Source = NLAUZON; Initial Catalog = CarTrading; Integrated Security = True";    
+        //private readonly string connectionString = "Data Source=DESKTOP-OEAERTJ;Initial Catalog=CarTrading;Integrated Security=True;TrustServerCertificate=True;";    
 
         private readonly ILogger<HomeController> _logger;
 
@@ -35,7 +35,6 @@ namespace CarTrading.Controllers
                 connection.Open();
                 //string sql = "SELECT * FROM Users WHERE Username = @Username and Password =@Password";
                 string sql = "SELECT * FROM Users WHERE username = @Username;";
-
                 using (SqlCommand command = new SqlCommand(sql, connection))
                 {
                     command.Parameters.AddWithValue("@Username", model.Username);
