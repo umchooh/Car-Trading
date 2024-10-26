@@ -1,8 +1,5 @@
-<<<<<<< Updated upstream
-=======
 using Microsoft.EntityFrameworkCore;
 using CarTrading;
->>>>>>> Stashed changes
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -34,8 +31,6 @@ app.UseSession();
 
 app.UseAuthorization();
 
-<<<<<<< Updated upstream
-=======
 /*app.MapControllerRoute(
     name: "signup",
     pattern: "SignUp/{action=Index}/{id?}");*/
@@ -44,7 +39,6 @@ app.UseAuthorization();
     name: "default",
     pattern: "{controller=ProductList}/{action=Index}/{id?}");*/
 
->>>>>>> Stashed changes
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Login}/{action=Index}/{id?}");
