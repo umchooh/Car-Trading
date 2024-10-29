@@ -1,5 +1,5 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Product List";
 }
 
 <div>
@@ -12,6 +12,45 @@
                     <button class="btn btn-primary">Refresh</button>
                 </div>
                 <b>Search by:</b>
+                <select class="form-select" id="carMake" aria-label="Default select example">
+                  <option value="0" selected>Car maker</option>
+                  <option value="1">Audi</option>
+                  <option value="2">BMW</option>
+                  <option value="3">Fiat</option>
+                  <option value="4">Ford</option>
+                  <option value="5">Honda</option>
+                  <option value="6">GM</option>
+                  <option value="7">Mazda</option>
+                  <option value="8">Mercedes</option>
+                  <option value="9">Nissan</option>
+                  <option value="10">Subaru</option>
+                  <option value="11">Suzuki</option>
+                  <option value="12">Toyota</option>
+                  <option value="13">Volvo</option>
+                </select>
+                <select class="form-select" id="carModel" aria-label="Default select example">
+                  <option value="0" selected>Car model</option>
+                  <option value="1">Coupe</option>
+                  <option value="2">Hatchback</option>
+                  <option value="3">Minivan</option>
+                  <option value="4">Sedan</option>
+                  <option value="5">SUV</option>
+                  <option value="6">Wagon</option>
+                </select>
+                <select class="form-select" id="carColor" aria-label="Default select example">
+                  <option value="0" selected>Car color</option>
+                  <option value="1">black</option>
+                  <option value="2">blue</option>
+                  <option value="3">green</option>
+                  <option value="4">grey</option>
+                  <option value="5">red</option>
+                  <option value="6">white</option>
+                </select>
+                <select class="form-select" id="carTrans" aria-label="Default select example">
+                  <option value="0" selected>Transmission</option>
+                  <option value="1">automatic</option>
+                  <option value="2">manual</option>
+                </select>
             </div>
         </div>
         <div class="col-md-9">
@@ -32,5 +71,21 @@
             }
         </div>
     </div>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
+<script>
+    const carMake = document.getElementById("carMake");
+    const carModel = document.getElementById("carModel");
+    const carColor = document.getElementById("carColor");
+    const carTrans = document.getElementById("carTrans");
+    var carMakeV = 0;
+    var carModelV = 0;
+    var carColorV = 0;
+    var carTransV = 0;
+    var list = [];
+    for (let i = 0; i< @Model.Count; i++) list[i] = 0;
+    console.log(list.length);
+    carMake.addEventListener("change", (e) => {carMakeV = e.target.value;});
+    carModel.addEventListener("change", (e) => {carModelV = e.target.value;});
+    carColor.addEventListener("change", (e) => {carColorV = e.target.value;});
+    carTrans.addEventListener("change", (e) => {carTransV = e.target.value;});
+</script>
