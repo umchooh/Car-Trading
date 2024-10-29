@@ -8,7 +8,7 @@
         <div class="col-md-3">
             <div class="row productList">
                 <div>
-                    <button class="btn btn-primary">Update</button>
+                    <button class="btn btn-primary" onclick="populateList()">Update</button>
                     <button class="btn btn-primary">Refresh</button>
                 </div>
                 <b>Search by:</b>
@@ -18,8 +18,8 @@
                   <option value="2">BMW</option>
                   <option value="3">Fiat</option>
                   <option value="4">Ford</option>
-                  <option value="5">Honda</option>
-                  <option value="6">GM</option>
+                  <option value="5">GM</option>
+                  <option value="6">Honda</option>
                   <option value="7">Mazda</option>
                   <option value="8">Mercedes</option>
                   <option value="9">Nissan</option>
@@ -53,39 +53,75 @@
                 </select>
             </div>
         </div>
-        <div class="col-md-9">
-            @foreach (var product in Model)
-            {
-                <div class="row productList">
-                    <a href="@Url.Action("Index", "ProductDetails", new { Product_ID = product.Product_ID })">
-                    <div class="row"><b>Product @product.Product_ID:</b></div>
-                    <div class="row">
-                        <div class="col-md-2" id="carPicList" style="background-image: url('CarPicture.jpg');"></div>
-                        <div class="col-md-10">
-                            <h3>@product.Product_title</h3>
-                            <p>@product.Product_desc</p>
-                        </div>
-                    </div>
-                    </a>
-                </div>
-            }
+        <div class="col-md-9" id="productList">
         </div>
     </div>
 </div>
-<script>
+<script type="text/javascript">
     const carMake = document.getElementById("carMake");
     const carModel = document.getElementById("carModel");
     const carColor = document.getElementById("carColor");
     const carTrans = document.getElementById("carTrans");
+    const pList = document.getElementById("productList");
+    var carMakeT = ["", "Audi", "BMW", "Fiat", "Ford", "GM", "Honda", "Mazda",
+        "Mercedes", "Nissan", "Subaru", "Suzuki", "Toyota", "Volvo"];
+    var carModelT = ["", "Coupe", "Hatchback", "Minivan", "Sedan", "SUV", "Wagon"];
+    var carColorT = ["", "black", "blue", "green", "grey", "red", "white"];
+    var carTransT = ["", "automatic", "manual"];
     var carMakeV = 0;
     var carModelV = 0;
     var carColorV = 0;
     var carTransV = 0;
-    var list = [];
-    for (let i = 0; i< @Model.Count; i++) list[i] = 0;
-    console.log(list.length);
     carMake.addEventListener("change", (e) => {carMakeV = e.target.value;});
     carModel.addEventListener("change", (e) => {carModelV = e.target.value;});
     carColor.addEventListener("change", (e) => {carColorV = e.target.value;});
     carTrans.addEventListener("change", (e) => {carTransV = e.target.value;});
+    populateList();
+    function populateList() {
+        var modelData = @Html.Raw(Json.Serialize(Model));
+        // Checking the list agaisnt the filters
+        var list = [];
+        var count = 0;
+        for (let i = 0; i < modelData.length; i++) {
+            list[i] = 1;
+            if (carMakeV != 0 && modelData[i].product_make != carMakeT[carMakeV]) {
+                list[i] = 0; 
+                continue;
+            }
+            if (carModelV != 0 && modelData[i].product_model != carModelT[carModelV]) {
+                list[i] = 0; 
+                continue;
+            }
+            if (carColorV != 0 && modelData[i].product_color != carColorT[carColorV]) {
+                list[i] = 0; 
+                continue;
+            }
+            if (carTransV != 0 && modelData[i].product_trans != carTransT[carTransV]) {
+                list[i] = 0; 
+                continue;
+            }
+            if (list[i] == 1) count++;
+        }
+        // Producing html tags for valid elements of the list
+        var str = "";
+        if (count == 0) {
+            str = str + "<div>No product available</div>";
+        }
+        else {
+            for (let i = 0; i < modelData.length; i++) {
+                if (list[i] == 1) {
+                    str = str + "<div class=\"row productList\">";
+                    str = str + "<a href=\"ProductDetails?Product_ID=" + modelData[i].product_ID + "\">";
+                    str = str + "<div class=\"row\"><b>Product " + modelData[i].product_ID + ":</b></div>";
+                    str = str + "<div class=\"row\">";
+                    str = str + "<div class=\"col-md-2\" id=\"carPicList\" style=\"background-image: url('CarPicture.jpg');\"></div>";
+                    str = str + "<div class=\"col-md-10\">";
+                    str = str + "<h3>" + modelData[i].product_title + "</h3>";
+                    str = str + "<p3>" + modelData[i].product_desc + "</p>";
+                    str = str + "</div></div></a></div>";
+                }
+            } 
+        }
+        pList.innerHTML = str;
+    }
 </script>
