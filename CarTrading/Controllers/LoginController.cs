@@ -1,9 +1,8 @@
 using CarTrading.Models;
 using Microsoft.AspNetCore.Mvc;
-using System;
+using System.Data;
 using System.Data.SqlClient;
 using System.Diagnostics;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace CarTrading.Controllers
 {
@@ -35,29 +34,69 @@ namespace CarTrading.Controllers
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 connection.Open();
-                //string sql = "SELECT * FROM Users WHERE Username = @Username and Password =@Password";
-                string sql = "SELECT * FROM Users WHERE username = @Username;";
-                using (SqlCommand command = new SqlCommand(sql, connection))
-                {
-                    command.Parameters.AddWithValue("@Username", model.Username);
-                    //command.Parameters.AddWithValue("@Password", model.Password);
-                    using (SqlDataReader reader = command.ExecuteReader())
-                    {
-                        if (reader.Read())
-                        {
-                            string roletype = reader["roletype"].ToString();
-                            HttpContext.Session.SetString("Username", model.Username);
-                            HttpContext.Session.SetString("roletype", roletype);
-                            HttpContext.Session.SetString("IsAuthenticated", "Y");
-                            return RedirectToAction("Index", "ProductList");
+                string query = "Login";
 
-                        }
-                        else
-                        {
-                            model.ErrorMessage = "Your username/password is incorrect";
-                            return View("Index", model);
-                        }
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.CommandType = CommandType.StoredProcedure;
+
+                    // Input parameters
+                    command.Parameters.AddWithValue("@User_name", model.Username);
+                    command.Parameters.AddWithValue("@Password", model.Password);
+
+                    // Output parameters
+                    SqlParameter resultParameter = new SqlParameter("@Result", SqlDbType.Int)
+                    {
+                        Direction = ParameterDirection.Output
+                    };
+                    command.Parameters.Add(resultParameter);
+
+                    SqlParameter roleTypeParameter = new SqlParameter("@RoleType", SqlDbType.NVarChar, 50)
+                    {
+                        Direction = ParameterDirection.Output
+                    };
+                    command.Parameters.Add(roleTypeParameter);
+
+                    SqlParameter usernameParameter = new SqlParameter("@username", SqlDbType.NVarChar, 50)
+                    {
+                        Direction = ParameterDirection.Output
+                    };
+                    command.Parameters.Add(usernameParameter);
+
+                    SqlParameter userIDParameter = new SqlParameter("@UserID", SqlDbType.Int)
+                    {
+                        Direction = ParameterDirection.Output
+                    };
+                    command.Parameters.Add(userIDParameter);
+
+                    command.ExecuteNonQuery(); // Execute the stored procedure
+
+                    // Get the result from the output parameter
+                    int result = (int)resultParameter.Value;
+                    string roleType = (string)roleTypeParameter.Value;
+                    string username = (string)usernameParameter.Value;
+                    int userID = (int)userIDParameter.Value;
+
+                    if (result == 1) // Successful login
+                    {
+                        // Set session variables
+                        HttpContext.Session.SetString("Username", username);
+                        HttpContext.Session.SetInt32("UserID", userID);
+                        HttpContext.Session.SetString("RoleType", roleType);
+
+                        HttpContext.Session.SetString("IsAuthenticated", "Y");
+                        return RedirectToAction("Index", "ProductList", model);
                     }
+                    else if (result == -1)
+                    {
+                        model.ErrorMessage = "Your username/password is incorrect";
+                    }
+                    else
+                    {
+                        model.ErrorMessage = "User does not exist";
+                    }
+
+                    return View("Index", model); // Return to login view with error message
                 }
             }
         }
