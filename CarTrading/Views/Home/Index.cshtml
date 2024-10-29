@@ -3,6 +3,9 @@
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome gg</h1>
+    <h1 class="display-4">Welcome @Context.Session.GetString("Username").</h1>
+    <h1 class="display-4">Welcome @Context.Session.GetInt32("UserID").</h1>
+    <h1 class="display-4">Welcome @Context.Session.GetString("RoleType").</h1>
+  
     <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
