@@ -73,6 +73,14 @@ namespace CarTrading.Controllers
         {
             return View();
         }
+        public string GetMyNameRight() 
+        {
+            return "Nicolas";
+        }
+        public int AddNumbers(int a, int b) 
+        {
+            return a + b;
+        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
