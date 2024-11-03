@@ -9,7 +9,6 @@ namespace CarTrading.Controllers
     public class LoginController : Controller
     {
 
-
         //private readonly string connectionString = "Data Source=DESKTOP-OEAERTJ;Initial Catalog=CarTrading;Integrated Security=True;TrustServerCertificate=True;";    
         private readonly string connectionString = "Data Source = NLAUZON; Initial Catalog = CarTrading; Integrated Security = True"; //; Trust Server Certificate=True";
 
