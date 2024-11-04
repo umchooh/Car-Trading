@@ -8,12 +8,13 @@ namespace CarTrading.Controllers
 {
     public class ProductDetailsController : Controller
     {
-        private readonly string connectionString = "Data Source = NLAUZON; Initial Catalog = CarTrading; Integrated Security = True"; //; Trust Server Certificate=True";
+        private readonly string connectionString;
         private readonly ILogger<HomeController> _logger;
 
-        public ProductDetailsController(ILogger<HomeController> logger)
+        public ProductDetailsController(ILogger<HomeController> logger, IConfiguration configuration)
         {
             _logger = logger;
+            connectionString = configuration.GetConnectionString("DefaultConnection");
         }
 
         public IActionResult Index(string Product_ID)

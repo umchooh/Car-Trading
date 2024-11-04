@@ -9,7 +9,7 @@
             <div class="row productList">
                 <div>
                     <button class="btn btn-primary" onclick="populateList()">Update</button>
-                    <button class="btn btn-primary">Refresh</button>
+                    <button class="btn btn-primary" onclick="refreshList()">Refresh</button>
                 </div>
                 <b>Search by:</b>
                 <select class="form-select" id="carMake" aria-label="Default select example">
@@ -77,6 +77,37 @@
     carColor.addEventListener("change", (e) => {carColorV = e.target.value;});
     carTrans.addEventListener("change", (e) => {carTransV = e.target.value;});
     populateList();
+    function refreshList() {
+        carMakeV = 0;
+        carModelV = 0;
+        carColorV = 0;
+        carTransV = 0;
+        for (let i = 0; i < carMake.options.length; i++) { 
+            if (carMake.options[i].value == 0) { 
+                carMake.options[i].selected = true;
+                break;
+            }
+        }
+        for (let i = 0; i < carModel.options.length; i++) {
+            if (carModel.options[i].value == 0) {
+                carModel.options[i].selected = true;
+                break;
+            }
+        }
+        for (let i = 0; i < carColor.options.length; i++) {
+            if (carColor.options[i].value == 0) {
+                carColor.options[i].selected = true;
+                break;
+            }
+        }
+        for (let i = 0; i < carTrans.options.length; i++) {
+            if (carTrans.options[i].value == 0) {
+                carTrans.options[i].selected = true;
+                break;
+            }
+        }
+        populateList();
+    }
     function populateList() {
         var modelData = @Html.Raw(Json.Serialize(Model));
         // Checking the list agaisnt the filters
