@@ -127,6 +127,8 @@
                 </div>
                 <button type="submit" >Sign In</button>
             </form>
+            <div class="pt-2">Already have an account? <a href="@Url.Action("Index", "Login")">Log In here</a></div>
+
 
             @if (Model != null && !string.IsNullOrEmpty(Model.ErrorMessage))
             {
