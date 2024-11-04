@@ -6,6 +6,7 @@ using System.Diagnostics;
 
 namespace CarTrading.Controllers
 {
+
     public class TesterForCRUD : Controller
     {
 
@@ -17,6 +18,7 @@ namespace CarTrading.Controllers
             _logger = logger;
             connectionString = configuration.GetConnectionString("DefaultConnection");
         }
+
 
 
         // GET: TesterForCRUD

@@ -1,0 +1,66 @@
+﻿@model List<ProductViewModel>
+
+@{
+    ViewData["Title"] = "Product List";
+}
+
+<h2>Product List</h2>
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["SuccessMessage"]
+    </div>
+}
+
+@if (!Model.Any())
+{
+    <p>No products found.</p>
+}
+else
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Product ID</th>
+                <th>User ID</th>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Price</th>
+                <th>Location</th>
+                <th>Color</th>
+                <th>Make</th>
+                <th>Model</th>
+                <th>Year</th>
+                <th>Mileage</th>
+                <th>Transmission</th>
+                <th>Fuel Type</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var product in Model)
+            {
+                <tr>
+                    <td>@product.Product_ID</td>
+                    <td>@product.User_ID</td>
+                    <td>@product.Product_title</td>
+                    <td>@product.Product_desc</td>
+                    <td>@product.Product_price</td>
+                    <td>@product.Product_loc</td>
+                    <td>@product.Product_color</td>
+                    <td>@product.Product_make</td>
+                    <td>@product.Product_model</td>
+                    <td>@product.Product_year</td>
+                    <td>@product.Product_mileage</td>
+                    <td>@product.Product_trans</td>
+                    <td>@product.Product_fuel</td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@product.Product_ID" class="btn btn-primary btn-sm">Edit</a>
+                        <a asp-action="Delete" asp-route-id="@product.Product_ID" class="btn btn-danger btn-sm">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
