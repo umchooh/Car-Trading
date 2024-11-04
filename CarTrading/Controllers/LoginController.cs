@@ -9,14 +9,13 @@ namespace CarTrading.Controllers
     public class LoginController : Controller
     {
 
-        //private readonly string connectionString = "Data Source=DESKTOP-OEAERTJ;Initial Catalog=CarTrading;Integrated Security=True;TrustServerCertificate=True;";    
-        private readonly string connectionString = "Data Source = NLAUZON; Initial Catalog = CarTrading; Integrated Security = True"; //; Trust Server Certificate=True";
-
+        private readonly string connectionString;
         private readonly ILogger<HomeController> _logger;
 
-        public LoginController(ILogger<HomeController> logger)
+        public LoginController(ILogger<HomeController> logger, IConfiguration configuration)
         {
             _logger = logger;
+            connectionString = configuration.GetConnectionString("DefaultConnection");
         }
 
         public IActionResult Index()

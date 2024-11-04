@@ -7,10 +7,19 @@ using System.Diagnostics;
 
 namespace CarTrading.Controllers
 {
-    public class AdminDashboardController(ILogger<HomeController> logger) : Controller
+
+    public class AdminDashboardController : Controller
     {
 
-        private readonly ILogger<HomeController> _logger = logger;
+        private readonly string connectionString;
+        private readonly ILogger<HomeController> _logger;
+
+        public AdminDashboardController(ILogger<HomeController> logger, IConfiguration configuration) 
+        {
+            _logger = logger;
+            connectionString = configuration.GetConnectionString("DefaultConnection");
+        }
+
 
 
         // GET: TesterForCRUD

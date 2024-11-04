@@ -6,10 +6,19 @@ using System.Diagnostics;
 
 namespace CarTrading.Controllers
 {
-    public class TesterForCRUD(ILogger<HomeController> logger) : Controller
+
+    public class TesterForCRUD : Controller
     {
 
-        private readonly ILogger<HomeController> _logger = logger;
+        private readonly string connectionString;
+        private readonly ILogger<HomeController> _logger;
+
+        public TesterForCRUD(ILogger<HomeController> logger, IConfiguration configuration) 
+        {
+            _logger = logger;
+            connectionString = configuration.GetConnectionString("DefaultConnection");
+        }
+
 
 
         // GET: TesterForCRUD
