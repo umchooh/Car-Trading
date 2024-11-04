@@ -18,6 +18,17 @@ namespace CarTrading.Controllers
             connectionString = configuration.GetConnectionString("DefaultConnection");
         }
 
+        private void UpdateLogRegistry(string msg)
+        {
+            string logEntry = "date: " + DateTime.Now + ", " + msg;
+            string dir = Directory.GetCurrentDirectory();
+            string path = Path.Combine(dir, "Resources\\Log.txt");
+            using (StreamWriter sw = new StreamWriter(path, true))
+            {
+                sw.WriteLine(logEntry);
+            }
+        }
+
         public IActionResult Index()
         {
             return View();
@@ -79,6 +90,8 @@ namespace CarTrading.Controllers
 
                         if (result == 1) // Successful login
                         {
+                            UpdateLogRegistry("userName: " + model.Username + ", result: Successful login");
+
                             // Set session variables
                             HttpContext.Session.SetString("Username", username);
                             HttpContext.Session.SetInt32("UserID", userID);
@@ -100,10 +113,12 @@ namespace CarTrading.Controllers
                         }
                         else if (result == -1)
                         {
+                            UpdateLogRegistry("userName: " + model.Username + ", result: Unsuccessful login");
                             model.ErrorMessage = "Your username/password is incorrect";
                         }
                         else
                         {
+                            UpdateLogRegistry("userName: " + model.Username + ", result: Unsuccessful login");
                             model.ErrorMessage = "User does not exist";
                         }
                     }
