@@ -36,7 +36,7 @@ namespace CarTrading.Controllers
         public IActionResult Logout()
         {
             HttpContext.Session.Clear();
-            return View("Index");
+            return RedirectToAction("Index", "Login");
         }
         public IActionResult LoginMethod(LoginViewModel model)
         {
