@@ -139,6 +139,7 @@
             str = str + "<div>No product available</div>";
         }
         else {
+            str = str + "<div><h2>" + count + " products available</h2></div>";
             for (let i = 0; i < modelData.length; i++) {
                 if (list[i] == 1) {
                     str = str + "<div class=\"row productList\">";
