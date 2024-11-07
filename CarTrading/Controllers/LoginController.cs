@@ -101,7 +101,7 @@ namespace CarTrading.Controllers
                             // Redirect to different pages based on role type if needed
                             if (roleType == "Admin")
                             {
-                                return RedirectToAction("Create", "AdminDashboard");
+                                return RedirectToAction("Index", "ProductList");
 
                             }
                             else

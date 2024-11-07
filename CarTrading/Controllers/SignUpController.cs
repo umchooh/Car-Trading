@@ -63,7 +63,7 @@ namespace CarTrading.Controllers
                         };
                         command.Parameters.Add(userIDParameter);
 
-                        SqlParameter messageParameter = new SqlParameter("@message", SqlDbType.NVarChar, 50)
+                        SqlParameter messageParameter = new SqlParameter("@message", SqlDbType.NVarChar, 250)
                         {
                             Direction = ParameterDirection.Output
                         };
